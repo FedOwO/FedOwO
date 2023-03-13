@@ -5,7 +5,7 @@ KERNEL_OFFSET equ 0x1000 ; The same one we used when linking the kernel
     mov bp, 0x9000
     mov sp, bp
 
-    mov bx, MSG_REAL_MODE 
+    mov bx, MSG_REAL_MODE
     call print
     call print_nl
 
@@ -27,7 +27,7 @@ load_kernel:
     call print_nl
 
     mov bx, KERNEL_OFFSET ; Read from disk and store in 0x1000
-    mov dh, 2
+    mov dh, 3
     mov dl, [BOOT_DRIVE]
     call disk_load
     ret
