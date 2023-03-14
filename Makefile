@@ -1,5 +1,7 @@
-C_SOURCES	= $(wildcard ./src/kernel/*.c)
-HEADERS		= $(wildcard ./src/kernel/*.h)
+# Wildcard recursif to get all c and h files
+rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(subst *,%,$2),$d))
+C_SOURCES	= $(call rwildcard, ./src, *.c)
+HEADERS		= $(call rwildcard, ./src, *.h)
 
 OBJ = ${C_SOURCES:.c=.o}
 
@@ -15,7 +17,7 @@ os-image.bin: boot.bin kernel.bin
 	cat ./src/boot-sector/boot.bin ./src/kernel/kernel.bin > os-image.bin
 
 kernel.bin: kernel-entry.o ${OBJ}
-	$(LD) -o ./src/kernel/kernel.bin -Ttext 0x1000 ./src/kernel/kernel-entry.o ./src/kernel/kernel.o --oformat binary
+	$(LD) -o ./src/kernel/$@ -Ttext 0x1000 ./src/kernel/kernel-entry.o ${OBJ} --oformat binary
 
 kernel-entry.o:
 	nasm ./src/kernel/kernel-entry.asm -f elf -o ./src/kernel/kernel-entry.o
