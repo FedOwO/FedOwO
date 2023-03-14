@@ -9,4 +9,5 @@ void clear_screen() {
         screen[i * 2] = ' ';
         screen[i * 2 + 1] = WHITE_ON_BLACK;
     }
+    set_cursor_offset(0);
 }
