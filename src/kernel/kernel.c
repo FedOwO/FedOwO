@@ -8,5 +8,4 @@ void kernel_main() {
         kprint("1 second passed\n");
         sleep(1000);
     }
-
 }
