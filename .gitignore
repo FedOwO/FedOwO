@@ -3,3 +3,4 @@
 *.dis
 .vscode
 .idea
+tests/*
