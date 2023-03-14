@@ -1,10 +1,5 @@
 #include "kernel.h"
 
-void a()
-{
-    a();
-}
-
 void kernel_main() {
     clear_screen();
     isr_setup();
@@ -20,6 +15,4 @@ void kernel_main() {
         sec++;
     }
     kprint("Done!\n");
-    kprint("And Now... CRASH!\n");
-    a();
 }
