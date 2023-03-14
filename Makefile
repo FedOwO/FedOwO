@@ -26,7 +26,7 @@ boot.bin:
 	nasm ./src/boot-sector/boot.asm -f bin -o ./src/boot-sector/boot.bin
 
 floppy: os-image.bin
-	qemu-system-i386 -fda os-image.bin
+	qemu-system-i386 -boot order=a -fda $<
 
 drive:
 	qemu-system-i386 -drive format=raw,file=os-image.bin
