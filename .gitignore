@@ -1,3 +1,5 @@
 *.o
 *.bin
 *.dis
+.vscode
+.idea
