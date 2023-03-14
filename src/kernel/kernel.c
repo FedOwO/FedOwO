@@ -1,11 +1,17 @@
 #include "kernel.h"
 
+void a()
+{
+    a();
+}
+
 void kernel_main() {
     clear_screen();
+    isr_setup();
     int sec = 0;
     kprint("Loading Kernel of FluffOS..\n");
     kprint("Booting into kernel.\n");
-    while (1) {
+    while (sec != 6) {
         char *str = (char *) get_cursor_offset();
         int_to_ascii(sec, str);
         kprint(str);
@@ -13,4 +19,7 @@ void kernel_main() {
         sleep(1000);
         sec++;
     }
+    kprint("Done!\n");
+    kprint("And Now... CRASH!\n");
+    a();
 }

@@ -3,7 +3,7 @@ rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(su
 C_SOURCES	= $(call rwildcard, ./src, *.c)
 HEADERS		= $(call rwildcard, ./src, *.h)
 
-OBJ = ${C_SOURCES:.c=.o}
+OBJ = ${C_SOURCES:.c=.o} ./src/cpu/interrupt.o
 
 CC	=	i386-elf-gcc
 LD	=	i386-elf-ld
@@ -46,6 +46,7 @@ debugkernel:
 
 %.o: %.asm
 	nasm $< -f elf -o $@
+
 
 %.bin: %.asm
 	nasm $< -f bin -o $@
