@@ -6,7 +6,7 @@ void kernel_main() {
     kprint("Booting into kernel.\n");
     isr_setup();
     asm volatile("sti");
-    //init_timer(10);/*comment to hide tick of the clock*/
+    init_timer(10);/*kprint in the callbask will be soon removed */
     init_keyboard();
     kprint("\nWelcome into FluffOs!\n");
 }
