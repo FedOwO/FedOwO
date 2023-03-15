@@ -7,9 +7,8 @@ void set_idt_gate(int n, unsigned int handler);
 void set_idt();
 
 isr_t interrupt_handlers[256];
-/* Can't do this with a loop because we need the address
- * of the function names */
 void isr_setup() {
+    kprint("Setting up isr...");
     set_idt_gate(0, (unsigned long)isr0);
     set_idt_gate(1, (unsigned long)isr1);
     set_idt_gate(2, (unsigned long)isr2);
@@ -42,8 +41,9 @@ void isr_setup() {
     set_idt_gate(29, (unsigned long)isr29);
     set_idt_gate(30, (unsigned long)isr30);
     set_idt_gate(31, (unsigned long)isr31);
+    kprint("Done!\n");
 
-    // Remap the PIC
+    kprint("Remapping irq...");
     port_byte_out(0x20, 0x11);
     port_byte_out(0xA0, 0x11);
     port_byte_out(0x21, 0x20);
@@ -54,8 +54,9 @@ void isr_setup() {
     port_byte_out(0xA1, 0x01);
     port_byte_out(0x21, 0x0);
     port_byte_out(0xA1, 0x0);
+    kprint("Done!\n");
 
-    // Install the IRQs
+    kprint("Setting up irq...");
     set_idt_gate(32, (unsigned long)irq0);
     set_idt_gate(33, (unsigned long)irq1);
     set_idt_gate(34, (unsigned long)irq2);
@@ -72,8 +73,11 @@ void isr_setup() {
     set_idt_gate(45, (unsigned long)irq13);
     set_idt_gate(46, (unsigned long)irq14);
     set_idt_gate(47, (unsigned long)irq15);
+    kprint("Done!\n");
 
-    set_idt(); // Load with ASM
+    kprint("Load idt...");
+    set_idt();
+    kprint("Done!\n");
 }
 
 /* To print the message which defines every exception */

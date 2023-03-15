@@ -8,7 +8,7 @@ OBJ = ${C_SOURCES:.c=.o} ./src/cpu/interrupt.o
 CC	=	i386-elf-gcc
 LD	=	i386-elf-ld
 
-CFLAGS = -g -ffreestanding -Wall -Wextra -fno-exceptions -m32
+CFLAGS = -g -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -Wall -Wextra
 
 all: floppy
 

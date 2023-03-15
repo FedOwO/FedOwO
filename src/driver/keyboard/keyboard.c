@@ -17,7 +17,9 @@ static void keyboard_callback(registers_t regs) {
 }
 
 void init_keyboard() {
+    kprint("Setting up keyboard...");
     register_interrupt_handler(IRQ1, keyboard_callback);
+    kprint("Done!\n");
 }
 
 void print_letter(unsigned char scancode) {
