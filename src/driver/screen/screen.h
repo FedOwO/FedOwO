@@ -10,7 +10,7 @@
     #define REG_SCREEN_CTRL 0x3d4
     #define REG_SCREEN_DATA 0x3d5
 
-    #include "../port/ports.h"
+    #include "../ports/ports.h"
 
 void clear_screen();
 int get_cursor_offset();
